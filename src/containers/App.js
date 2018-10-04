@@ -23,7 +23,6 @@ class App extends Component {
 
 // приклеиваем данные из store
 const mapStateToProps = store => {
-  console.log(store) // посмотрим, что же у нас в store?
   return {
     user: store.user,
     page: store.page,
