@@ -3,22 +3,27 @@ import { connect } from 'react-redux'
 import { User } from '../components/User.jsx'
 import { Page } from '../components/Page.jsx'
 import { getPhotos } from '../actions/PageActions'
+import { handleLogin } from '../actions/UserActions'
 
 import './App.css'
 
 class App extends Component {
   render() {
-    const { user, page, getPhotosAction } = this.props
+    const { user, page, getPhotosAction, handleLoginAction } = this.props
     return (
       <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Мой топ фото</h1>
-        </header>
-        <User name={user.name} />
         <Page
-          year={page.year}
           photos={page.photos}
+          year={page.year}
+          isFetching={page.isFetching}
           getPhotos={getPhotosAction}
+          error={page.error}
+        />
+        <User
+          name={user.name}
+          isFetching={user.isFetching}
+          error={user.error}
+          handleLogin={handleLoginAction}
         />
       </div>
     )
@@ -36,6 +41,7 @@ const mapStateToProps = store => {
 const mapDispatchToProps = dispatch => {
   return {
     getPhotosAction: year => dispatch(getPhotos(year)),
+    handleLoginAction: () => dispatch(handleLogin()),
   }
 }
 
