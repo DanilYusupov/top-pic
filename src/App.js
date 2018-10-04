@@ -4,17 +4,18 @@ import { connect } from 'react-redux'
 
 class App extends Component {
   render() {
-    const { name, surname, age } = this.props.user
+    const { name } = this.props.user
+    const { photos, year } = this.props.page
     return (
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">Мой топ фото</h1>
         </header>
         <p className="App-intro">Здесь будут мои самые "залайканные" фотки</p>
+        <p>Привет {name}!</p>
         <p>
-          Привет из App, {name} {surname}!
+          У тебя {photos.length} фото за {year} год.
         </p>
-        <p>Тебе уже {age}?</p>
       </div>
     )
   }
@@ -25,6 +26,7 @@ const mapStateToProps = store => {
   console.log(store) // посмотрим, что же у нас в store?
   return {
     user: store.user,
+    page: store.page,
   }
 }
 
